@@ -19,4 +19,5 @@ Note: Although I made a cheating script, I discourage you to use this in a publi
 with people who are simply enjoying the game.
 
 The script can be open with "lua_openscript_cl" followed by "cl_mingrot_a.lua"
+
 sv_allowcslua must be set to 1 for it to work. (Unless if you have a modified client.dll file)
