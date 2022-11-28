@@ -179,7 +179,7 @@ function local_user_aimb()
 end
 
 function user_admin_check()
-    if ply_is_admin == true or ply_is_spradmin == true then //Check if the player's an admin or not.
+    if ply_is_admin == true or ply_is_spradmin == true then --Check if the player's an admin or not.
         draw.DrawText("Admin", DermaDefault, ply_position.x, ply_position.y-35, Color( 255, 165, 0, 200 ), TEXT_ALIGN_CENTER)
     else
         draw.DrawText("User", DermaDefault, ply_position.x, ply_position.y-35, Color( 25, 255, 25, 165 ), TEXT_ALIGN_CENTER)
