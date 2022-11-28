@@ -1,6 +1,6 @@
 print("==[MinGROT A -- Version: 1.40]==")
 
-//Note: Num Lock must be turned on for numpad binds to work properly.
+--Note: Num Lock must be turned on for numpad binds to work properly.
 
 ply_range = 4500
 aimb_range = 1000
@@ -15,11 +15,11 @@ hook.Add("HUDPaint", "draw_general", function()
         ply_gen_pos = v:GetPos()
         local_ply_gen_shootpos = LocalPlayer():GetShootPos()
 
-        //Checks if a player is in range
+        --Checks if a player is in range
         if (local_ply_gen_shootpos - ply_gen_pos):Length() < ply_range then
-            ply_name = v:Name() //Gets name.
-            ply_weapon = v:GetActiveWeapon() //Gets the weapon they're holding.
-            ply_health = v:Health() //Gets health.
+            ply_name = v:Name() --Gets name.
+            ply_weapon = v:GetActiveWeapon() --Gets the weapon they're holding.
+            ply_health = v:Health() --Gets health.
 
             ply_is_admin = v:IsAdmin()
             ply_is_spradmin = v:IsSuperAdmin()
@@ -45,8 +45,8 @@ hook.Add("HUDPaint", "draw_general", function()
             if not_player == true then
                 if mingrot_is_on == true then 
                     if info_is_on == true then
-                        draw.DrawText(ply_name, DermaDefault, ply_position.x, ply_position.y-10, Color( 255, 255, 255, 255 ), TEXT_ALIGN_CENTER) //Text with the player's name.
-                        draw.DrawText(ply_weapon, DermaDefault, ply_position.x, ply_position.y-25, Color( 255, 255, 255, 165 ), TEXT_ALIGN_CENTER) //Text with the player's gun.
+                        draw.DrawText(ply_name, DermaDefault, ply_position.x, ply_position.y-10, Color( 255, 255, 255, 255 ), TEXT_ALIGN_CENTER) --Text with the player's name.
+                        draw.DrawText(ply_weapon, DermaDefault, ply_position.x, ply_position.y-25, Color( 255, 255, 255, 165 ), TEXT_ALIGN_CENTER) --Text with the player's gun.
 
                         user_admin_check()
                         user_health_check()
@@ -54,10 +54,10 @@ hook.Add("HUDPaint", "draw_general", function()
 
                     if tracers_are_on == true then 
                         surface.SetDrawColor(255, 255, 255, 110)
-                        surface.DrawLine(ply_position_2.x, ply_position_2.y, ply_self_position.x, ply_self_position.y) //Tracer from player to local player.
+                        surface.DrawLine(ply_position_2.x, ply_position_2.y, ply_self_position.x, ply_self_position.y) --Tracer from player to local player.
 
                         surface.SetDrawColor(255, 0, 0, 255)
-                        surface.DrawLine(ply_position.x, ply_position.y, ply_aim2.x, ply_aim2.y) //Tracer from the player's head to surface.
+                        surface.DrawLine(ply_position.x, ply_position.y, ply_aim2.x, ply_aim2.y) --Tracer from the player's head to surface.
                     end
                 end
             end
@@ -88,13 +88,13 @@ hook.Add("PostRender", "override_screenshot", function()
             h = 0
         })
 
-        //file.Write("screen_override.png", screenshots)
-        //file.write is not needed to overwrite the hook? The image is 0x0 pixels anyways.
-        //Ignore "Freeimage couldn't allocate!" in the console.
+        --file.Write("screen_override.png", screenshots)
+        --file.write is not needed to overwrite the hook? The image is 0x0 pixels anyways.
+        --Ignore "Freeimage couldn't allocate!" in the console.
     end
 end)
 
-//Doing this by tick is worse than this timer (in terms of player ease.)
+--Doing this by tick is worse than this timer (in terms of player ease.)
 timer.Create("key_bind_check", 0.1, 0, function() 
     if input.IsKeyDown(KEY_PAD_0) == true then
         aimb_range = 500
@@ -114,7 +114,7 @@ timer.Create("key_bind_check", 0.1, 0, function()
         ply_range = 8000
     end
 
-    //Reset script values.
+    --Reset script values.
     if input.IsKeyDown(KEY_PAD_DECIMAL) == true then
         ply_range = 4500
         aimb_range = 1000
@@ -187,7 +187,7 @@ function user_admin_check()
 end
 
 function user_health_check()
-    if ply_health > 50 then //Checking the player's health points for the text's color.
+    if ply_health > 50 then --Checking the player's health points for the text's color.
         draw.DrawText("Health: " ..ply_health, DermaDefault, ply_position.x, ply_position.y-55, Color( 90, 255, 25, 165 ), TEXT_ALIGN_CENTER)
     else
         draw.DrawText("Health: " ..ply_health, DermaDefault, ply_position.x, ply_position.y-55, Color( 255, 75, 25, 165 ), TEXT_ALIGN_CENTER)
@@ -196,7 +196,7 @@ end
 
 
 
-concommand.Add("cl_mingrot_debug_info", function(ply, cmd, args) //Lists general information regarding all players.
+concommand.Add("cl_mingrot_debug_info", function(ply, cmd, args) --Lists general information regarding all players.
     if ply_aim != NULL then
         if ply_name != NULL then
             for i, j in pairs(player.GetAll()) do
@@ -210,14 +210,14 @@ concommand.Add("cl_mingrot_debug_info", function(ply, cmd, args) //Lists general
     end
 end)
 
-concommand.Add("cl_mingrot_help", function(ply, cmd, args) //Lists control and general information.
+concommand.Add("cl_mingrot_help", function(ply, cmd, args) --Lists control and general information.
     print("\n[----MinGROT Commands----]\n")
     print("1. AIMBOT. \n    *UP ARROW KEY to toggle. \n    *NUMPAD 0 for 500 unit aimbot range. \n    *NUMPAD 1 for 1000 unit aimbot range. \n    *NUMPAD 2 for 2000 unit aimbot range. \n    *NUMPAD 3 for 5000 unit aimbot range. \n")
     print("2. GENERAL. \n    *NUMPAD 4 for 1500 unit wallhack. \n    *NUMPAD 5 for 3500 unit wallhack. \n    *NUMPAD 6 for 5000 unit wallhack. \n    *RIGHT ARROW KEY to toggle player stats. \n    *LEFT ARROW KEY to toggle tracers. \n    *DOWN ARROW KEY to toggle MinGROT as a whole. \n    *NUMPAD 0 to reset script values.")
     print("3. MISC. \n    *Type \"cl_mingrot\" to see more commands.")
 end)
 
-//Commands are here in-case of no numpad or misc. issues.
+--Commands are here in-case of no numpad or misc. issues.
 
 concommand.Add("cl_mingrot_aim_on", function(ply, cmd, args)
     aimb_is_on = true
